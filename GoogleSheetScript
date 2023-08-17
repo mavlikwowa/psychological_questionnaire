@@ -1,0 +1,99 @@
+var sheetName = 'Sheet1'
+var scriptProp = PropertiesService.getScriptProperties()
+
+function generateUID() {
+  var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var sections = [8, 4, 4, 4, 12]; // Длины секций
+  var uid = '';
+
+  for (var i = 0; i < sections.length; i++) {
+    for (var j = 0; j < sections[i]; j++) {
+      var randomIndex = Math.floor(Math.random() * chars.length);
+      uid += chars.charAt(randomIndex);
+    }
+    if (i < sections.length - 1) {
+      uid += '-';
+    }
+  }
+
+  return uid;
+}
+
+function deleteRowById(idToDelete) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][0] == idToDelete) {
+      sheet.deleteRow(i + 1); // +1, так как индексация строк начинается с 1, но i начинается с 0
+    }
+  }
+}
+
+function checkRow(idToCheck) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+
+  for (var i = 1; i < data.length; i++) {
+    if (String(data[i][0]) === String(idToCheck)) {
+      var hasOtherRecords = false;
+      for (var j = 1; j < data[i].length; j++) {
+        if (data[i][j] !== '') {
+          hasOtherRecords = true;
+          break;
+        }
+      }
+      if (!hasOtherRecords) {
+        deleteRowById(idToCheck);
+        return true;
+      };
+    }
+  }
+
+  return false; // Строка не существует
+}
+
+function intialSetup () {
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  var lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    if (!checkRow(e.parameter.id)) {
+      return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': 'Запись производилась или идентификатор не найден', 'form': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    var sheet = doc.getSheetByName(sheetName)
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    var nextRow = sheet.getLastRow() + 1
+
+    var newRow = headers.map(function(header) {
+      return header === 'timestamp' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success!!!', 'row': nextRow, 'e': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
