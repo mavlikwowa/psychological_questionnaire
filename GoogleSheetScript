@@ -30,7 +30,7 @@ function deleteRowById(idToDelete) {
   }
 }
 
-function checkRow(idToCheck) {
+function checkRow(idToCheck, isOnlyCheck) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data = sheet.getDataRange().getValues();
 
@@ -44,7 +44,7 @@ function checkRow(idToCheck) {
         }
       }
       if (!hasOtherRecords) {
-        deleteRowById(idToCheck);
+        if (!isOnlyCheck) deleteRowById(idToCheck);
         return true;
       };
     }
@@ -63,6 +63,13 @@ function doPost (e) {
   lock.tryLock(10000)
 
   try {
+    if (e.parameter.isOnlyCheck) {
+      var check = checkRow(e.parameter.id, true)
+      return ContentService
+      .createTextOutput(JSON.stringify({ 'result': check ? 'success' : 'error' }))
+      .setMimeType(ContentService.MimeType.JSON)
+    }
+
     if (!checkRow(e.parameter.id)) {
       return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': 'Запись производилась или идентификатор не найден', 'form': e }))
@@ -83,7 +90,7 @@ function doPost (e) {
 
 
     return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'success!!!', 'row': nextRow, 'e': e }))
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow, 'e': e }))
       .setMimeType(ContentService.MimeType.JSON)
   }
 

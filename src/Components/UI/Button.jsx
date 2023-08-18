@@ -13,8 +13,12 @@ const Root = styled.button`
   background: #5A5A5A;
   cursor: pointer;
   
-  &:hover {
+  &:hover:not(:disabled) {
     background: black;
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
   }
   
   ${isDesktopSmall} {
@@ -22,10 +26,10 @@ const Root = styled.button`
   }
 `
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, disabled, ...props }) => {
   return (
     <Root {...props}>
-      {children}
+      {disabled ? 'Загрузка...' : children}
     </Root>
   );
 }

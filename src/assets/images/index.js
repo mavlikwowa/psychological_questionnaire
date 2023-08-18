@@ -1,2 +1,3 @@
 import { ReactComponent as ArrowIcon } from './arrow.svg';
-export { ArrowIcon };
+import { ReactComponent as PagesIcon } from './pages.svg';
+export { ArrowIcon, PagesIcon };

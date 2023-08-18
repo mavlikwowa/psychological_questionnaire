@@ -1,34 +1,73 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { Header } from '@ui';
 
 import Card from './Components/Card';
-import Greetings from '@src/Pages/Greetings.jsx';
+import { MainContext } from '@src/Providers/MainProvider';
+import Error from '@src/Pages/Error';
 
 import { GlobalStyles } from './styles.js';
 import './fonts.css';
 
+import CONFIG from './config';
+
+const StyledHeader = styled(Header)`
+  margin-top: 30%;
+  text-align: center;
+  width: 100%;
+`;
+
 const App = () => {
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const { currentPage, setFormData, formData } = useContext(MainContext);
 
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycby6JJAG3zii2_yT3gYvnc-mKefNQJZfQ9JtpAPc2xiSr6QLKNMdkTT2jYYh4Xflw5C-Jg/exec';
+  useEffect(() => {
+    if (!location?.pathname) return;
+    (async () => {
+      const queryParams = new URLSearchParams(location.search);
+      const paramValue = queryParams.get('uid');
 
-  const onClick = async () => {
-    let formData = new FormData();
-    formData.append('id', 'm3e25fvm-wjpu-x6yd-wnvm-jgbtf3wiep1l');
-    formData.append('Ваше имя', 'Владимир');
-    formData.append('Ваш возраст', 31);
-    formData.append('Ник в Telegram', 'mavlikwowa');
+      if (!paramValue) setError(true);
 
-    const res = await fetch(scriptUrl, { method: 'POST', body: formData})
-    const data = await res.json();
-    console.log(data);
-  }
+      let form = new FormData();
+      form.append('id', paramValue);
+      form.append('isOnlyCheck', true);
 
+      try {
+        const res = await fetch(CONFIG.scriptUrl, { method: 'POST', body: form})
+        const data = await res.json();
+        setError(data.result !== 'success');
+        if (data.result === 'success') setFormData({ ...formData, id: paramValue })
+      } catch (e) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    })()
+  }, [location?.pathname]);
+
+  const { component: Page }  = CONFIG.pages[currentPage];
+
+  if (loading) return (
+    <>
+      <GlobalStyles />
+      <Card>
+        <StyledHeader>
+          Загрузка данных...
+        </StyledHeader>
+      </Card>
+    </>
+  );
 
   return (
     <>
       <GlobalStyles />
       <Card>
-        <Greetings />
-        {/*<button onClick={onClick}>Go</button>*/}
+        {error && <Error />}
+        {Page && !error ? <Page /> : <></>}
       </Card>
     </>
   );
