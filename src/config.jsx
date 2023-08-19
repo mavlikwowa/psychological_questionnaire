@@ -9,6 +9,8 @@ const CONFIG =  {
     name: 'Ваше имя',
     age: 'Ваш возраст',
     telegram: 'Ник в Telegram',
+    testSlider: 'Пример вопроса',
+    testRow: 'Пример строки',
   },
   pages: {
     0: {

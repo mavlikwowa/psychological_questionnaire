@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { MainContext } from '@src/Providers/MainProvider';
 import GreetingRow from '@src/Components/GreetingRow';
 import Focus from '@src/Components/Focus';
-import { Input, Button } from '@ui';
+import { Input, Button, Slider, Row } from '@ui';
 import { isDesktopSmall } from '@src/styles.js';
 import { ArrowIcon } from '@images';
 import CONFIG from '../config.jsx';
@@ -15,6 +15,10 @@ const Root = styled.main`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+  
+  .slider {
+    margin-top: 20px;
+  }
 `;
 
 const Label = styled.h3`
@@ -51,6 +55,10 @@ const StyledInfo = styled.span`
   text-align: center;
   color: ${({ $isError }) => $isError ? 'red' : 'green'};
   font-size: 24px;
+  margin-top: 20px;
+`;
+
+const StyledRow = styled(Row)`
   margin-top: 20px;
 `;
 
@@ -119,6 +127,26 @@ const Credentails = () => {
           onChange={(e) => onChange(e, 'telegram')}
         />
       </StyledFocus>
+
+      <Slider
+        value={formData.test}
+        onChange={(event, newValue) => {
+          setFormData({ ...formData, testSlider: newValue });
+        }}
+        className="slider"
+        labelText="Пример вопроса"
+      />
+
+      <StyledRow
+        selectedQuestion={formData.testRow}
+        setSelectedQuestion={(newValue) => {
+          setFormData({ ...formData, testRow: newValue });
+        }}
+        label="Пример вопроса"
+        number={1}
+        questions={['Глобальность', 'Смелость', 'Представительность', 'Осторожность']}
+      />
+
       {info?.text && <StyledInfo $isError={info.isError}>{info.text}</StyledInfo>}
       {!isDesktop && <StyledButton disabled={loading} onClick={onClick}>Далее<ArrowIcon /></StyledButton>}
     </Root>

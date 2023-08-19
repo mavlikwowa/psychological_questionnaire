@@ -13,7 +13,7 @@ import './fonts.css';
 import CONFIG from './config';
 
 const StyledHeader = styled(Header)`
-  margin-top: 30%;
+  margin-top: 20%;
   text-align: center;
   width: 100%;
 `;

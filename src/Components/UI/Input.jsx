@@ -13,6 +13,7 @@ const StyledInput = styled.input`
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.10);
   height: 49px;
   padding: 10px 20px;
+  width: 100%;
 
   &::placeholder {
     color: #A5A5A5;

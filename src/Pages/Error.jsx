@@ -3,7 +3,7 @@ import { Header } from '@ui';
 
 const StyledHeader = styled(Header)`
   color: red;
-  margin-top: 30%;
+  margin-top: 20%;
   text-align: center;
   width: 100%;
 `;
