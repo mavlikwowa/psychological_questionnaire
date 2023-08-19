@@ -5,7 +5,7 @@ const initialFormData = {
   name: '',
   age: null,
   telegram: '',
-  testSlider: 0,
+  testSlider: 5,
   testRow: '',
 }
 

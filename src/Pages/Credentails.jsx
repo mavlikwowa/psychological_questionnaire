@@ -129,7 +129,7 @@ const Credentails = () => {
       </StyledFocus>
 
       <Slider
-        value={formData.test}
+        value={formData.testSlider}
         onChange={(event, newValue) => {
           setFormData({ ...formData, testSlider: newValue });
         }}
