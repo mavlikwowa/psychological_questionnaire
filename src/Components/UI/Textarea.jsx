@@ -8,30 +8,31 @@ const Root = styled.div`
   width: 100%;
 `;
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   border-radius: 10px;
   background: #FFF;
-  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.10);
-  height: 49px;
-  padding: 10px 20px;
+  box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.10);
+  height: 130px;
+  padding: 10px;
   width: 100%;
+  resize: none;
 
   &::placeholder {
     color: #A5A5A5;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   }
 `;
 
-const Input = ({ labelComponent: Label, ...props }) => {
+const Textarea = ({ labelComponent: Label, ...props }) => {
   return (
     <Root>
       {Label && <Label />}
-      <StyledInput {...props} />
+      <StyledTextarea {...props} />
     </Root>
   );
 }
 
-export default Input;
+export default Textarea;

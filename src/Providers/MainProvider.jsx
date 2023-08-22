@@ -1,12 +1,24 @@
 import { createContext, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const initialFormData = {
-  id: '',
-  name: '',
-  age: null,
-  telegram: '',
-  testSlider: 5,
-  testRow: '',
+  0: {
+    id: '',
+  },
+  1: {
+    name: '',
+    age: null,
+    telegram: '',
+  },
+  2: {
+    threeQuestions: '',
+    role1: '',
+    role2: '',
+    role3: '',
+    target1: '',
+    target2: '',
+    target3: '',
+  },
 }
 
 export const MainContext = createContext({
@@ -19,6 +31,10 @@ export const MainContext = createContext({
   setFormData: () => {
     /** init */
   },
+
+  goToNextPage: () => {
+    /** init */
+  },
 });
 
 const { Provider } = MainContext;
@@ -27,12 +43,32 @@ const MainProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [formData, setFormData] = useState(initialFormData);
 
+  const goToNextPage = () => {
+    console.log(formData, 'formData');
+    const hasEmptyFields = Object.keys(formData[currentPage]).some(k => !formData[currentPage][k])
+
+    if (hasEmptyFields) {
+      toast.error('Заполните необходимые поля', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+      return;
+    }
+
+    setCurrentPage(prev => prev + 1);
+  };
+
   return (
     <Provider value={{
       currentPage,
       setCurrentPage,
       formData,
-      setFormData
+      setFormData,
+      goToNextPage,
     }}>
       {children}
     </Provider>

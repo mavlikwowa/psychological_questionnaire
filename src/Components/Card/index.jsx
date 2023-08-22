@@ -3,7 +3,8 @@ import { isDesktopLarge, isDesktopSmall } from '@src/styles';
 
 const Root = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background: #F1F1F1;
   display: flex;
   flex-direction: column;
@@ -12,11 +13,11 @@ const Root = styled.div`
   padding: 22px 15px;
   
   ${isDesktopSmall} {
-    height: 100%;
     border-radius: 10px;
     padding: 35px 80px;
-    height: calc(100vh - 80px);
-    width: 90vw;
+    min-height: calc(100vh - 80px);
+    height: 100%;
+    width: 100%;
   }
   
   ${isDesktopLarge} {

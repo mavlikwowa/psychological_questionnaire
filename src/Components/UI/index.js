@@ -4,6 +4,7 @@ import ListItems from './ListItems';
 import Input from './Input';
 import Slider from './Slider';
 import Row from './Row';
+import Textarea from './Textarea';
 
 export {
   Button,
@@ -12,4 +13,5 @@ export {
   Input,
   Slider,
   Row,
+  Textarea,
 }

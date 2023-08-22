@@ -29,7 +29,7 @@ const Root = styled.div`
 
 const PagesAmount = () => {
   const { currentPage } = useContext(MainContext);
-  const allPages = Object.keys(CONFIG.pages).reduce((a, i) => a + Number(i), 0)
+  const allPages = Math.max(...Object.keys(CONFIG.pages));
   return (
     <Root>
       <PagesIcon />
