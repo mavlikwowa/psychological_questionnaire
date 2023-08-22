@@ -653,10 +653,17 @@ Valid keys: `+JSON.stringify(Object.keys(T),null,"  "));var Pe=I(V,J,Q,b,H+"."+J
   gap: 5.25px;
   flex-shrink: 0;
   border-radius: 2.625px;
+  
+  &:hover {
+    background: #5A5A5A;
+    color: white;
+  }
+  
   border: 0.525px solid #5A5A5A;
   ${({$clicked:e})=>e&&lo`
     border: 0.525px solid #5A5A5A;
     background: #5A5A5A;
+    color: white;
   `}
 
   ${ie} {
