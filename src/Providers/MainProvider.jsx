@@ -19,6 +19,28 @@ const initialFormData = {
     target2: '',
     target3: '',
   },
+  3: {
+    thirdQuestion1: '',
+    thirdQuestion2: '',
+    thirdQuestion3: '',
+    thirdQuestion4: '',
+    thirdQuestion5: '',
+    thirdQuestion6: '',
+    thirdQuestion7: '',
+    thirdQuestion8: '',
+    thirdQuestion9: '',
+    thirdQuestion10: '',
+    thirdQuestion11: '',
+    thirdQuestion12: '',
+    thirdQuestion13: '',
+    thirdQuestion14: '',
+    thirdQuestion15: '',
+    thirdQuestion16: '',
+    thirdQuestion17: '',
+    thirdQuestion18: '',
+    thirdQuestion19: '',
+    thirdQuestion20: '',
+  },
 }
 
 export const MainContext = createContext({
@@ -44,7 +66,6 @@ const MainProvider = ({ children }) => {
   const [formData, setFormData] = useState(initialFormData);
 
   const goToNextPage = () => {
-    console.log(formData, 'formData');
     const hasEmptyFields = Object.keys(formData[currentPage]).some(k => !formData[currentPage][k])
 
     if (hasEmptyFields) {
