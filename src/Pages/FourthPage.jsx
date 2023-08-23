@@ -2,11 +2,14 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
-import { Button, ListItems } from '@ui';
+import { Button, Textarea } from '@ui';
 import { MainContext } from '@src/Providers/MainProvider';
 import GreetingRow from '@src/Components/GreetingRow';
-import YesNoButtons, { ANSWERS } from '@src/Components/YesNoButtons';
 import { ArrowIcon } from '@images';
+import firstImage from '@images/firstPicture.png';
+import secondImage from '@images/secondPicture.png';
+import thirdImage from '@images/thirdPicture.png';
+import fourthImage from '@images/fourthPicture.png';
 import { isDesktopSmall } from '@src/styles';
 import CONFIG from '@src/config';
 
@@ -31,13 +34,6 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const HighlightedText = styled.span`
-  background-color: #5A5A5A;
-  color: white;
-  border-radius: 5px;
-  padding: 3px;
-`;
-
 const StyledHeader = styled.h3`
   color: black;
   font-size: 20px;
@@ -52,50 +48,33 @@ const StyledHeader = styled.h3`
   }
 `;
 
-const StyledListItems = styled(ListItems)`
-  li {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    color: #5A5A5A;
-    margin-bottom: 12px;
-    
-    &::before {
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      color: #5A5A5A;
-      margin-right: 3px;
-    }
-  }
-  
-  p {
-    flex: 1;
-  }
+const StyledImagesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  width: 100%;
 
   ${isDesktopSmall} {
-    flex-direction: column;
-    
-    li {
-      color: black;
-      font-size: 18px;
-      &::before {
-        font-size: 18px;
-        color: black;
-      }
-    }
-
-    p {
-      flex: initial;
-    }
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 `;
 
-const ThirdPage = () => {
+const StyledImageItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const StyledTextarea = styled(Textarea)`
+  height: 195px;
+`;
+
+const FourthPage = () => {
   const { formData, setFormData, goToNextPage, currentPage } = useContext(MainContext);
 
-  const onClick = (field, answer) => {
-    setFormData({ ...formData, [currentPage]: { ...formData[currentPage], [field]: answer }})
+  const onChange = (e, field) => {
+    setFormData({ ...formData, [currentPage]: { ...formData[currentPage], [field]: e?.target?.value }})
   };
 
   const isDesktop = useMediaQuery({
@@ -103,28 +82,30 @@ const ThirdPage = () => {
   });
 
   const mappingData = Object.keys(CONFIG.mappingFields).filter(k => Object.keys(formData[currentPage]).includes(k));
+  const imageMapping = {
+    firstImage: firstImage,
+    secondImage: secondImage,
+    thirdImage: thirdImage,
+    fourthImage: fourthImage,
+  };
 
   return (
     <Root>
       <GreetingRow>{
         isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
       }</GreetingRow>
-      <StyledHeader>Очень быстро, <HighlightedText>не вдумываясь,</HighlightedText> ответьте на вопросы только ДА или НЕТ.</StyledHeader>
-      <StyledListItems>
-        {mappingData.map(k => (
-          <li key={k}>
-            <p>{`${CONFIG.mappingFields[k]}?`}</p>{' '}
-            <YesNoButtons
-              answer={formData[currentPage][k]}
-              onClickYes={() => onClick(k, ANSWERS[0])}
-              onClickNo={() => onClick(k, ANSWERS[1])}
-            />
-          </li>
+      <StyledHeader>Кратко опишите каждую картинку. Что вы на ней видите?</StyledHeader>
+      <StyledImagesWrapper>
+        {mappingData.map(item => (
+          <StyledImageItem key={item}>
+            <img src={imageMapping[item]} alt={item} />
+            <StyledTextarea onChange={(e) => onChange(e, item)} />
+          </StyledImageItem>
         ))}
-      </StyledListItems>
+      </StyledImagesWrapper>
       {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
     </Root>
   );
 }
 
-export default ThirdPage;
+export default FourthPage;

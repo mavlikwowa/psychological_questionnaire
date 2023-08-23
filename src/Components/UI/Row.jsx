@@ -1,11 +1,15 @@
-import { useMediaQuery } from 'react-responsive';
 import styled, { css } from 'styled-components';
-import { isDesktopSmall } from '@src/styles.js';
+import { isDesktopMedium, isDesktopSmall } from '@src/styles.js';
 
-const Wrapper = styled.main`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 20px;
+
+  ${isDesktopMedium} {
+    margin-bottom: 0;
+  }
 `;
 
 const Label = styled.h4`
@@ -15,7 +19,7 @@ const Label = styled.h4`
   font-weight: 600;
   line-height: normal;
   
-  ${isDesktopSmall} {
+  ${isDesktopMedium} {
     font-size: 24px;
   }
 `;
@@ -25,7 +29,7 @@ const Root = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 
-  ${isDesktopSmall} {
+  ${isDesktopMedium} {
     border-radius: 10px;
   }
 `;
@@ -39,8 +43,9 @@ const Number = styled.span`
   gap: 10px;
   border-radius: 5px;
   border: 1px solid black;
+  width: 40px;
 
-  ${isDesktopSmall} {
+  ${isDesktopMedium} {
     border-radius: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -54,8 +59,9 @@ const QuestionWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
+  white-space: nowrap;
 
-  ${isDesktopSmall} {
+  ${isDesktopMedium} {
     flex-direction: row;
   }
 `;
@@ -73,6 +79,11 @@ const Question = styled.span`
   width: 100%;
   cursor: pointer;
   height: 100%;
+  min-width: 70vw;
+  
+  ${isDesktopSmall} {
+    min-width: 50vw;
+  }
 
   &:hover {
     background: #5A5A5A;
@@ -83,11 +94,13 @@ const Question = styled.span`
     color: #FFF;
   `};
 
-  ${isDesktopSmall} {
+  ${isDesktopMedium} {
     border-radius: 0;
     background: white;
     border: none;
     border: 1px solid #000;
+    width: 237px;
+    min-width: auto;
     
     &:last-of-type {
       border-top-right-radius: 8px;
@@ -104,7 +117,7 @@ const Question = styled.span`
 const Row = ({ number = 1, questions = [], label = '', selectedQuestion, setSelectedQuestion, ...props }) => {
   return (
     <Wrapper {...props}>
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       <Root>
         <Number>{number}</Number>
         <QuestionWrapper>

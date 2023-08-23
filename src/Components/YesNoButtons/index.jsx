@@ -30,10 +30,17 @@ const StyledButton = styled.button`
   gap: 5.25px;
   flex-shrink: 0;
   border-radius: 2.625px;
+  
+  &:hover {
+    background: #5A5A5A;
+    color: white;
+  }
+  
   border: 0.525px solid #5A5A5A;
   ${({ $clicked }) => $clicked && css`
     border: 0.525px solid #5A5A5A;
     background: #5A5A5A;
+    color: white;
   `}
 
   ${isDesktopSmall} {

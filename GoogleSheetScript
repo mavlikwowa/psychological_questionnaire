@@ -63,6 +63,7 @@ function doPost (e) {
   lock.tryLock(10000)
 
   try {
+    // todo: разделить на post и get запросы
     if (e.parameter.isOnlyCheck) {
       var check = checkRow(e.parameter.id, true)
       return ContentService

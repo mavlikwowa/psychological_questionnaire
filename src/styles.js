@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const isDesktopSmall = '@media (min-width: 940px)';
-export const isDesktopMedium = '@media (min-width: 1280px)';
+export const isDesktopMedium = '@media (min-width: 1400px)';
 export const isDesktopLarge = '@media (min-width: 1600px)';
 
 export const GlobalStyles = createGlobalStyle`
