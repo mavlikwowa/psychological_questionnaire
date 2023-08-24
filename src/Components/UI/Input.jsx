@@ -16,6 +16,13 @@ const StyledInput = styled.input`
   padding: 10px 20px;
   width: 100%;
 
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
   &::placeholder {
     color: #A5A5A5;
     font-size: 18px;

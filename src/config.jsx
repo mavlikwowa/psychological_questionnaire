@@ -4,6 +4,7 @@ import SecondPage from '@src/Pages/SecondPage';
 import ThirdPage from '@src/Pages/ThirdPage';
 import FourthPage from '@src/Pages/FourthPage';
 import FifthPage from '@src/Pages/FifthPage';
+import SixthPage from '@src/Pages/SixthPage.jsx';
 
 
 const CONFIG =  {
@@ -65,6 +66,11 @@ const CONFIG =  {
     thirteenthRow: 'Тринадцатое слово',
     fourteenthRow: 'Четырнадцатое слово',
     fifteenthRow: 'Пятнадцатое слово',
+    // 6
+    firstQuestion: 'Для вас важна хорошо оплачиваемая работа, даже если вы не получаете должного признания.',
+    secondQuestion: 'Для вас важны признание и похвала, даже если оплата не очень высока.',
+    thirdQuestion: 'Тестовый вопрос 1',
+    fourthQuestion: 'Тестовый вопрос 2',
   },
   pages: {
     0: {
@@ -101,6 +107,9 @@ const CONFIG =  {
         fourteenthRow: ['Формальность', 'Настойчивость', 'Выразительность', 'Сомнение'],
         fifteenthRow: ['Настойчивость', 'Убедительность', 'Доверие', 'Сдержанный'],
       }
+    },
+    6: {
+      component: SixthPage,
     },
   }
 }

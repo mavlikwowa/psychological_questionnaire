@@ -63,11 +63,12 @@ const initialFormData = {
     thirteenthRow: '',
     fourteenthRow: '',
     fifteenthRow: '',
-    sixteenthRow: '',
-    seventeenthRow: '',
-    eighteenthRow: '',
-    nineteenthRow: '',
-    twentiethRow: '',
+  },
+  6: {
+    firstQuestion: '',
+    secondQuestion: '',
+    thirdQuestion: '',
+    fourthQuestion: '',
   },
 }
 
