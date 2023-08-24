@@ -4,7 +4,8 @@ import SecondPage from '@src/Pages/SecondPage';
 import ThirdPage from '@src/Pages/ThirdPage';
 import FourthPage from '@src/Pages/FourthPage';
 import FifthPage from '@src/Pages/FifthPage';
-import SixthPage from '@src/Pages/SixthPage.jsx';
+import SixthPage from '@src/Pages/SixthPage';
+import SeventhPage from '@src/Pages/SeventhPage';
 
 
 const CONFIG =  {
@@ -71,6 +72,28 @@ const CONFIG =  {
     secondQuestion: 'Для вас важны признание и похвала, даже если оплата не очень высока.',
     thirdQuestion: 'Тестовый вопрос 1',
     fourthQuestion: 'Тестовый вопрос 2',
+    // 7
+    seventhQuestion1: 'Мне порой не хватает выдержки.',
+    seventhQuestion2: 'Если мои желания мешают мне, я могу их подавлять.',
+    seventhQuestion3: 'Родители,должны устраивать жизнь своих детей.',
+    seventhQuestion4: 'Я иногда преувеличиваю свою роль в каких-либо событиях.',
+    seventhQuestion5: 'Меня провести не легко.',
+    seventhQuestion6: 'Мне бы понравилось быть воспитателем.',
+    seventhQuestion7: 'Бывает, мне хочется подурачиться, как маленькому.',
+    seventhQuestion8: 'Думаю, что я правильно понимаю все происходящие события.',
+    seventhQuestion9: 'Каждый должен выполнять свой долг.',
+    seventhQuestion10: 'Нередко я поступаю не как надо, а как хочется.',
+    seventhQuestion11: 'Принимая решение, я стараюсь продумать его последствия.',
+    seventhQuestion12: 'Младшее поколение должно учиться у старших, как ему следует жить.',
+    seventhQuestion13: 'Я, как и многие люди, бываю обидчив.',
+    seventhQuestion14: 'Мне удается видеть в людях больше, чем они говорят о себе.',
+    seventhQuestion15: 'Дети должны безусловно следовать указаниям родителей.',
+    seventhQuestion16: 'Я увлекающийся человек.',
+    seventhQuestion17: 'Мой основной критерий оценки человека – объективность.',
+    seventhQuestion18: 'Мои взгляды непоколебимы.',
+    seventhQuestion19: 'Бывает, я не уступаю в споре лишь потому, что не хочу уступать.',
+    seventhQuestion20: 'Правила оправданы лишь до тех пор, пока они полезны.',
+    seventhQuestion21: 'Люди должны соблюдать все правила, независимо от обстоятельств.',
   },
   pages: {
     0: {
@@ -110,6 +133,9 @@ const CONFIG =  {
     },
     6: {
       component: SixthPage,
+    },
+    7: {
+      component: SeventhPage,
     },
   }
 }

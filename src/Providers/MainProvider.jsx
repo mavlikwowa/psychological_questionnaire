@@ -7,7 +7,7 @@ const initialFormData = {
   },
   1: {
     name: '',
-    age: null,
+    age: '',
     telegram: '',
   },
   2: {
@@ -70,6 +70,29 @@ const initialFormData = {
     thirdQuestion: '',
     fourthQuestion: '',
   },
+  7: {
+    seventhQuestion1: 0,
+    seventhQuestion2: 0,
+    seventhQuestion3: 0,
+    seventhQuestion4: 0,
+    seventhQuestion5: 0,
+    seventhQuestion6: 0,
+    seventhQuestion7: 0,
+    seventhQuestion8: 0,
+    seventhQuestion9: 0,
+    seventhQuestion10: 0,
+    seventhQuestion11: 0,
+    seventhQuestion12: 0,
+    seventhQuestion13: 0,
+    seventhQuestion14: 0,
+    seventhQuestion15: 0,
+    seventhQuestion16: 0,
+    seventhQuestion17: 0,
+    seventhQuestion18: 0,
+    seventhQuestion19: 0,
+    seventhQuestion20: 0,
+    seventhQuestion21: 0,
+  },
 }
 
 export const MainContext = createContext({
@@ -91,11 +114,13 @@ export const MainContext = createContext({
 const { Provider } = MainContext;
 
 const MainProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(7);
   const [formData, setFormData] = useState(initialFormData);
 
   const goToNextPage = () => {
-    const hasEmptyFields = Object.keys(formData[currentPage]).some(k => !formData[currentPage][k])
+    const hasEmptyFields = Object.keys(formData[currentPage])
+      // 0 can be an answer
+      .some(k => formData[currentPage][k] === '')
 
     if (hasEmptyFields) {
       toast.error('Заполните необходимые поля', {

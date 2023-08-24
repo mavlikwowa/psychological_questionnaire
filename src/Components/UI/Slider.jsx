@@ -27,7 +27,7 @@ const StyledQuestion = styled.p`
   }
 `;
 
-const SliderComponent = ({ labelText, className, ...props }) => {
+const SliderComponent = ({ labelText, className, width, ...props }) => {
   return (
     <Root className={className}>
       <StyledQuestion>{labelText}</StyledQuestion>
@@ -41,7 +41,7 @@ const SliderComponent = ({ labelText, className, ...props }) => {
         sx={{
           left: '12px',
           color: 'black',
-          width: '150px',
+          width: `${width ?? '150px'}`,
           '& .MuiSlider-thumb': {
             backgroundColor: 'black',
             display: 'flex',

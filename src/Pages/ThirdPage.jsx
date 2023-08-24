@@ -9,6 +9,7 @@ import YesNoButtons, { ANSWERS } from '@src/Components/YesNoButtons';
 import { ArrowIcon } from '@images';
 import { isDesktopSmall } from '@src/styles';
 import CONFIG from '@src/config';
+import Focus from '@src/Components/Focus/index.jsx';
 
 const Root = styled.main`
   display: flex;
@@ -53,41 +54,23 @@ const StyledHeader = styled.h3`
 `;
 
 const StyledListItems = styled(ListItems)`
-  li {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    color: #5A5A5A;
-    margin-bottom: 12px;
-    
-    &::before {
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      color: #5A5A5A;
-      margin-right: 3px;
-    }
-  }
-  
-  p {
-    flex: 1;
-  }
-
   ${isDesktopSmall} {
     flex-direction: column;
-    
-    li {
-      color: black;
-      font-size: 18px;
-      &::before {
-        font-size: 18px;
-        color: black;
-      }
-    }
+  }
+`;
 
-    p {
-      flex: initial;
-    }
+const StyledRow = styled(Focus)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  ${isDesktopSmall} {
+    border: none;
+    border-radius: initial;
+    margin-bottom: 0;
+    justify-content: flex-start;
   }
 `;
 
@@ -111,15 +94,15 @@ const ThirdPage = () => {
       }</GreetingRow>
       <StyledHeader>Очень быстро, <HighlightedText>не вдумываясь,</HighlightedText> ответьте на вопросы только ДА или НЕТ.</StyledHeader>
       <StyledListItems>
-        {mappingData.map(k => (
-          <li key={k}>
-            <p>{`${CONFIG.mappingFields[k]}?`}</p>{' '}
+        {mappingData.map((k, index) => (
+          <StyledRow key={k}>
+            {`${index + 1}. ${CONFIG.mappingFields[k]}?`}
             <YesNoButtons
               answer={formData[currentPage][k]}
               onClickYes={() => onClick(k, ANSWERS[0])}
               onClickNo={() => onClick(k, ANSWERS[1])}
             />
-          </li>
+          </StyledRow>
         ))}
       </StyledListItems>
       {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
