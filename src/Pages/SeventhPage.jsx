@@ -38,7 +38,7 @@ const StyledHeader = styled.h3`
   font-weight: 600;
   line-height: 32px;
   margin-bottom: 20px;
-  max-width: 730px;
+  max-width: 660px;
 
   ${isDesktopSmall} {
     font-size: 24px;
@@ -158,12 +158,16 @@ const SeventhPage = () => {
     query: `(min-width: 940px)`,
   });
 
+  const isDesktopMedium = useMediaQuery({
+    query: `(min-width: 1400px)`,
+  });
+
   const mappingData = Object.keys(CONFIG.mappingFields).filter(k => Object.keys(formData[currentPage]).includes(k));
 
   return (
     <Root>
       <StyledGreetingRow>{
-        isDesktop && (
+        isDesktopMedium && (
           <>
             <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
             <StyledNotice>
@@ -177,14 +181,14 @@ const SeventhPage = () => {
         Оцените приведенные ниже высказывания в баллах от 0 до 10.
       </StyledHeader>
       {
-        !showMobileNotice && !isDesktop && (
+        !showMobileNotice && !isDesktopMedium && (
           <StyledExampleButton onClick={openMobileNotice}>
             Смотреть инструкцию<ArrowSlimIcon />
           </StyledExampleButton>
         )
       }
       {
-        showMobileNotice && !isDesktop && (
+        showMobileNotice && !isDesktopMedium && (
           <StyledMobileNotice>
             <StyledMobileNoticeHeader>
               Например:
