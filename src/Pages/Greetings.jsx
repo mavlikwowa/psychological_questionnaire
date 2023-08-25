@@ -47,8 +47,7 @@ const StyledFocus = styled(Focus)`
 `
 
 const Greetings = () => {
-  const { setCurrentPage } = useContext(MainContext);
-  const onButtonClick = () => setCurrentPage(1);
+  const { goToNextPage } = useContext(MainContext);
 
   return (
     <Root>
@@ -59,7 +58,7 @@ const Greetings = () => {
           <li>Отвечайте на вопросы быстро.</li>
           <li>Не обманывая себя.</li>
         </ListItems>
-        <StyledButton onClick={onButtonClick}>Начать!<ArrowIcon /></StyledButton>
+        <StyledButton onClick={goToNextPage}>Начать!<ArrowIcon /></StyledButton>
       </StyledFocus>
     </Root>
   );

@@ -9,6 +9,7 @@ import { ArrowIcon, ArrowSlimIcon, CloseIcon } from '@images';
 import { isDesktopSmall } from '@src/styles';
 import CONFIG from '@src/config';
 import Focus from '@src/Components/Focus/index.jsx';
+import { toast } from 'react-toastify';
 
 const Root = styled.main`
   display: flex;
@@ -146,6 +147,61 @@ const StyledMobileNoticeText = styled.p`
 const SeventhPage = () => {
   const { formData, setFormData, goToNextPage, currentPage } = useContext(MainContext);
   const [showMobileNotice, setShowMobileNotice] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const onFinish = async () => {
+    const allFields = {};
+    Object.keys(formData).forEach(k => Object.assign(allFields, formData[k]));
+    const hasEmptyFields = Object.keys(allFields).some(k => allFields[k] === '');
+
+    if (hasEmptyFields) {
+      console.log(formData, 'formData');
+      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+      return;
+    }
+
+    const form = new FormData();
+    Object.keys(allFields).forEach(k => {
+      form.append(CONFIG.mappingFields[k], allFields[k]);
+    })
+
+    try {
+      setLoading(true);
+      const res = await fetch(CONFIG.scriptUrl, { method: 'POST', body: form})
+      const data = await res.json();
+      if (data?.result === 'success') {
+        goToNextPage();
+        return;
+      }
+      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+    } catch (e) {
+      console.error(e);
+      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const onChange = (field, answer) => {
     setFormData({ ...formData, [currentPage]: { ...formData[currentPage], [field]: answer }})
@@ -166,17 +222,15 @@ const SeventhPage = () => {
 
   return (
     <Root>
-      <StyledGreetingRow>{
-        isDesktopMedium && (
-          <>
-            <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
-            <StyledNotice>
-              <Text>Абсолютно согласен это - 10 баллов, категорически не согласен это 0.</Text>
-              <Text>Варьируйте балы самостоятельно, например, скорее да в зависимости от ситуации – 7 балов, скорее нет в зависимости от ситуации – 3 балла.</Text>
-            </StyledNotice>
-          </>
-        )
-      }</StyledGreetingRow>
+      <StyledGreetingRow>
+        {isDesktop && <StyledButton disabled={loading} onClick={onFinish}>Далее<ArrowIcon /></StyledButton>}
+        {isDesktopMedium && (
+          <StyledNotice>
+            <Text>Абсолютно согласен это - 10 баллов, категорически не согласен это 0.</Text>
+            <Text>Варьируйте балы самостоятельно, например, скорее да в зависимости от ситуации – 7 балов, скорее нет в зависимости от ситуации – 3 балла.</Text>
+          </StyledNotice>
+        )}
+      </StyledGreetingRow>
       <StyledHeader>
         Оцените приведенные ниже высказывания в баллах от 0 до 10.
       </StyledHeader>
@@ -212,7 +266,7 @@ const SeventhPage = () => {
           </StyledRow>
         ))}
       </StyledListItems>
-      {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
+      {!isDesktop && <StyledButton disabled={loading} onClick={onFinish}>Далее<ArrowIcon /></StyledButton>}
     </Root>
   );
 }

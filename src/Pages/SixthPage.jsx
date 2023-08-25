@@ -99,7 +99,7 @@ const StyledExampleButton = styled.button`
 
 const StyledPageCount = styled.div`
   display: flex;
-  width: 73px;
+  width: 75px;
   height: 26px;
   padding: 5.261px;
   justify-content: center;
@@ -155,6 +155,19 @@ const SixthPage = () => {
   const onExampleClick = () => setShowExample(true);
 
   const checkCurrentSum = () => {
+    if (getItemsForPage(questionPage).some(k => formData[currentPage][k] === '')) {
+      const errorMessage= 'Заполните необходимые поля';
+      toast.error(errorMessage, {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+
+      return false;
+    }
     const currentSum = getItemsForPage(questionPage)
       .reduce((acc, k) => Number(formData[currentPage][k]) + acc, 0);
     if (currentSum === 5) return true;

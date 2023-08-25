@@ -65,31 +65,6 @@ const Credentails = () => {
 
   const inputLabel = (text) => <Label>{text}</Label>
 
-  // const onFinish = async () => {
-  //   const hasEmptyFields = Object.keys(formData).some(k => !formData[k])
-  //
-  //   if (hasEmptyFields) {
-  //     return;
-  //   }
-  //
-  //   const form = new FormData();
-  //   const allFields = {};
-  //   Object.keys(formData).forEach(k => Object.assign(allFields, formData[k]));
-  //   Object.keys(formData).forEach(k => {
-  //     form.append(CONFIG.mappingFields[k], allFields[k]);
-  //   })
-  //
-  //   try {
-  //     setLoading(true);
-  //     const res = await fetch(CONFIG.scriptUrl, { method: 'POST', body: form})
-  //     const data = await res.json();
-  //     const isError = data?.result !== 'success'
-  //   } catch (e) {
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   return (
     <Root>
       <GreetingRow>{
@@ -113,25 +88,6 @@ const Credentails = () => {
           onChange={(e) => onChange(e, 'telegram')}
         />
       </StyledFocus>
-
-      {/*<Slider*/}
-      {/*  value={formData.testSlider}*/}
-      {/*  onChange={(event, newValue) => {*/}
-      {/*    setFormData({ ...formData, testSlider: newValue });*/}
-      {/*  }}*/}
-      {/*  className="slider"*/}
-      {/*  labelText="Пример вопроса"*/}
-      {/*/>*/}
-
-      {/*<StyledRow*/}
-      {/*  selectedQuestion={formData.testRow}*/}
-      {/*  setSelectedQuestion={(newValue) => {*/}
-      {/*    setFormData({ ...formData, testRow: newValue });*/}
-      {/*  }}*/}
-      {/*  label="Пример вопроса"*/}
-      {/*  number={1}*/}
-      {/*  questions={['Глобальность', 'Смелость', 'Представительность', 'Осторожность']}*/}
-      {/*/>*/}
 
       {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
     </Root>
