@@ -127,6 +127,14 @@ const StyledRow = styled.span`
   }
 `;
 
+const StyledQuestionWithInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+`;
+
 const SixthPage = () => {
   const { formData, setFormData, goToNextPage, currentPage } = useContext(MainContext);
   const [questionPage, setQuestionPage] = useState(1);
@@ -134,7 +142,7 @@ const SixthPage = () => {
 
   const onChange = (field, event) => {
     const inputValue = event?.target?.value;
-    if (inputValue && (inputValue < 0 || inputValue > 5)) return;
+    if (inputValue && (inputValue < 0 || inputValue > 5 || inputValue.length > 1)) return;
     setFormData({ ...formData, [currentPage]: { ...formData[currentPage], [field]: inputValue }})
   };
 
@@ -225,15 +233,17 @@ const SixthPage = () => {
               </StyledPageCount>
             </>
           )}
-          {getItemsForPage(questionPage).map(k => (
-            <QuestionWithInput
-              key={k}
-              question={`${CONFIG.mappingFields[k]}`}
-              value={formData[currentPage][k]}
-              field={k}
-              onChange={onChange}
-            />
-          ))}
+          <StyledQuestionWithInputWrapper>
+            {getItemsForPage(questionPage).map(k => (
+              <QuestionWithInput
+                key={k}
+                question={`${CONFIG.mappingFields[k]}`}
+                value={formData[currentPage][k]}
+                field={k}
+                onChange={onChange}
+              />
+            ))}
+          </StyledQuestionWithInputWrapper>
           <StyledRow $isDesktop={isDesktop}>
             {isDesktop && (
               <StyledPageCount>

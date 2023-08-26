@@ -170,6 +170,12 @@ const MainProvider = ({ children }) => {
   const [formData, setFormData] = useState(initialFormData);
 
   const goToNextPage = () => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant',
+      });
+    });
     const hasEmptyFields = Object.keys(formData[currentPage])
       // 0 can be an answer
       .some(k => formData[currentPage][k] === '')

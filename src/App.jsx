@@ -34,12 +34,8 @@ const App = () => {
 
       if (!paramValue) setError(true);
 
-      let form = new FormData();
-      form.append('id', paramValue);
-      form.append('isOnlyCheck', true);
-
       try {
-        const res = await fetch(CONFIG.scriptUrl, { method: 'POST', body: form})
+        const res = await fetch(`${CONFIG.scriptUrl}?id=${paramValue}`)
         const data = await res.json();
         setError(data.result !== 'success');
         if (data.result === 'success')

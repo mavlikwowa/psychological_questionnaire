@@ -155,7 +155,6 @@ const SeventhPage = () => {
     const hasEmptyFields = Object.keys(allFields).some(k => allFields[k] === '');
 
     if (hasEmptyFields) {
-      console.log(formData, 'formData');
       toast.error('Ошибка отправки данных, обратитесь к администратору', {
         position: 'bottom-right',
         autoClose: 2000,

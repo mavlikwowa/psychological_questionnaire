@@ -15,7 +15,8 @@ const StyledQuestion = styled.div`
   border-radius: 10px;
   background: #FFFF;
   min-height: 60px;
-  max-width: 553px;
+  width: 100%;
+  word-break: break-word;
 `;
 
 const StyledInput = styled.input`
@@ -52,6 +53,26 @@ const StyledFocus = styled(Focus)`
   width: auto;
 `;
 
+const preventMinusNegatives = (e) => {
+  if (e.code === 'Minus' || e.key === '.') {
+    e.preventDefault();
+  }
+};
+
+const numberInputOnWheelPreventChange = (e) => {
+  // Prevent the input value change
+  e.target.blur()
+
+  // Prevent the page/container scrolling
+  e.stopPropagation()
+
+  // Refocus immediately, on the next tick (after the current function is done)
+  setTimeout(() => {
+    e.target.focus()
+  }, 0)
+}
+
+
 const QuestionWithInput = ({ question, value, onChange, field }) => {
   return (
     <StyledFocus>
@@ -60,6 +81,8 @@ const QuestionWithInput = ({ question, value, onChange, field }) => {
         type="number"
         value={value}
         onChange={e => onChange(field, e)}
+        onKeyDown={preventMinusNegatives}
+        onWheel={numberInputOnWheelPreventChange}
       />
     </StyledFocus>
   );

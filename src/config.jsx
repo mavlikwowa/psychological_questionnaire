@@ -10,7 +10,7 @@ import Finish from '@src/Pages/Finish';
 
 
 const CONFIG =  {
-  scriptUrl: 'https://script.google.com/macros/s/AKfycbzC-Zx0D3nG6V0veEmEkTRUT0wLKLVMKufDrP8eW1bclXhC023byOqH8i1dKTkw_qFsvQ/exec',
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbwjkEKDqtnjvWzjLJlmYXc_jCWWTY9pAYThrjsWlT-velQS3M0ScwYzyWYZqNFBprYfgg/exec',
   mappingFields: {
     // 0
     id: 'id',

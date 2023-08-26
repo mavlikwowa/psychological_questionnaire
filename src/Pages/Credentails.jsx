@@ -65,6 +65,12 @@ const Credentails = () => {
 
   const inputLabel = (text) => <Label>{text}</Label>
 
+  const preventMinusNegatives = (e) => {
+    if (e.code === 'Minus' || e.key === '.') {
+      e.preventDefault();
+    }
+  };
+
   return (
     <Root>
       <GreetingRow>{
@@ -78,9 +84,11 @@ const Credentails = () => {
         />
         <Input
           type="number"
+          min="1"
           labelComponent={() => inputLabel('Ваш возраст:')}
           placeholder="35 лет" value={formData[currentPage].age ?? ''}
           onChange={(e) => onChange(e, 'age')}
+          onKeyDown={preventMinusNegatives}
         />
         <Input
           labelComponent={() => inputLabel('Ник в телеграм')}
