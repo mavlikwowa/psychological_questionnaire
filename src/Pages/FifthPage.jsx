@@ -50,8 +50,8 @@ const FifthPage = () => {
     setFormData({ ...formData, [currentPage]: { ...formData[currentPage], [field]: value }})
   };
 
-  const isDesktop = useMediaQuery({
-    query: `(min-width: 940px)`,
+  const isDesktopMedium = useMediaQuery({
+    query: `(min-width: 1400px)`,
   });
 
   const { questions } = CONFIG.pages[currentPage];
@@ -59,7 +59,7 @@ const FifthPage = () => {
   return (
     <Root>
       <GreetingRow>{
-        isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
+        isDesktopMedium && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
       }</GreetingRow>
       <StyledHeader>В каждой строке выберите только одно из четырех слов, которое наиболее точно характеризует вас.</StyledHeader>
       {Object.keys(questions).map((k, index) => (
@@ -67,11 +67,11 @@ const FifthPage = () => {
           key={k}
           selectedQuestion={formData[currentPage][k]}
           setSelectedQuestion={(newValue) => onChange(k, newValue)}
-          number={index}
+          number={index + 1}
           questions={questions[k]}
         />
       ))}
-      {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
+      {!isDesktopMedium && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
     </Root>
   );
 }

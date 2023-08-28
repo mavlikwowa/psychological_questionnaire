@@ -54,7 +54,7 @@ const StyledFocus = styled(Focus)`
 `;
 
 const preventMinusNegatives = (e) => {
-  if (e.code === 'Minus' || e.key === '.') {
+  if (e.code === 'Minus' || e.key === '.' || e.key === ',') {
     e.preventDefault();
   }
 };
@@ -79,6 +79,7 @@ const QuestionWithInput = ({ question, value, onChange, field }) => {
       <StyledQuestion>{question}</StyledQuestion>
       <StyledInput
         type="number"
+        pattern="[0-5]*"
         value={value}
         onChange={e => onChange(field, e)}
         onKeyDown={preventMinusNegatives}

@@ -52,13 +52,13 @@ const Greetings = () => {
   return (
     <Root>
       <GreetingRow />
-      <StyledHeader>Это ваш персональный тест от AIMME.</StyledHeader>
+      <StyledHeader>Привет!<br />Это ваш персональный тест от AIMME.</StyledHeader>
       <StyledFocus>
         <ListItems>
           <li>Отвечайте на вопросы быстро.</li>
           <li>Не обманывая себя.</li>
         </ListItems>
-        <StyledButton onClick={goToNextPage}>Начать!<ArrowIcon /></StyledButton>
+        <StyledButton onClick={goToNextPage}>Начать<ArrowIcon /></StyledButton>
       </StyledFocus>
     </Root>
   );

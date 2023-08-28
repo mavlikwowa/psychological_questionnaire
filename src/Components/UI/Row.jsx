@@ -80,6 +80,7 @@ const Question = styled.span`
   cursor: pointer;
   height: 100%;
   min-width: 70vw;
+  margin-bottom: 1px;
   
   ${isDesktopSmall} {
     min-width: 50vw;
@@ -97,10 +98,10 @@ const Question = styled.span`
   ${isDesktopMedium} {
     border-radius: 0;
     background: white;
-    border: none;
     border: 1px solid #000;
     width: 237px;
     min-width: auto;
+    margin-bottom: 0;
     
     &:last-of-type {
       border-top-right-radius: 8px;

@@ -37,8 +37,14 @@ const StyledButton = styled.button`
   }
   
   border: 0.525px solid #5A5A5A;
+  border-top: 0.525px solid #5A5A5A;
+  box-sizing: border-box;
+  margin-top: 1px;
   ${({ $clicked }) => $clicked && css`
     border: 0.525px solid #5A5A5A;
+    border-top: 0.525px solid #5A5A5A;
+    box-sizing: border-box;
+    margin-top: 1px;
     background: #5A5A5A;
     color: white;
   `}

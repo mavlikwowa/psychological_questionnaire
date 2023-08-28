@@ -33,10 +33,8 @@ const StyledButton = styled(Button)`
 `;
 
 const HighlightedText = styled.span`
-  background-color: #5A5A5A;
-  color: white;
-  border-radius: 5px;
-  padding: 3px;
+  text-decoration: underline;
+  font-weight: 800;
 `;
 
 const StyledHeader = styled.h3`
@@ -89,9 +87,7 @@ const ThirdPage = () => {
 
   return (
     <Root>
-      <GreetingRow>{
-        isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
-      }</GreetingRow>
+      <GreetingRow />
       <StyledHeader>Очень быстро, <HighlightedText>не вдумываясь,</HighlightedText> ответьте на вопросы только ДА или НЕТ.</StyledHeader>
       <StyledListItems>
         {mappingData.map((k, index) => (
@@ -105,7 +101,7 @@ const ThirdPage = () => {
           </StyledRow>
         ))}
       </StyledListItems>
-      {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}
+      <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>
     </Root>
   );
 }

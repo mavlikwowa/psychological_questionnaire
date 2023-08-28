@@ -86,6 +86,7 @@ const StyledNotice = styled.div`
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.25);
   position: absolute;
   top: 120px;
+  right: 170px;
 `;
 
 const Text = styled.p`
@@ -144,18 +145,34 @@ const StyledMobileNoticeText = styled.p`
   line-height: 150%;
 `;
 
+const COMMON_ERROR = 'Ошибка отправки данных, обратитесь к администратору';
+
 const SeventhPage = () => {
   const { formData, setFormData, goToNextPage, currentPage } = useContext(MainContext);
   const [showMobileNotice, setShowMobileNotice] = useState(false);
   const [loading, setLoading] = useState(false);
+  const mappingData = Object.keys(CONFIG.mappingFields).filter(k => Object.keys(formData[currentPage]).includes(k));
 
   const onFinish = async () => {
     const allFields = {};
     Object.keys(formData).forEach(k => Object.assign(allFields, formData[k]));
     const hasEmptyFields = Object.keys(allFields).some(k => allFields[k] === '');
+    const isAllCurrentAnswersZero = Object.values(formData[currentPage]).reduce((a, i) => a + i) === 0;
 
     if (hasEmptyFields) {
-      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+      toast.error('Заполните необходимые поля', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        className: 'toast-error',
+      });
+      return;
+    }
+
+    if (isAllCurrentAnswersZero) {
+      toast.error('Кажется, вы не ответили ни на один вопрос на этой странице', {
         position: 'bottom-right',
         autoClose: 2000,
         hideProgressBar: true,
@@ -179,7 +196,7 @@ const SeventhPage = () => {
         goToNextPage();
         return;
       }
-      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+      toast.error(COMMON_ERROR, {
         position: 'bottom-right',
         autoClose: 2000,
         hideProgressBar: true,
@@ -189,7 +206,7 @@ const SeventhPage = () => {
       });
     } catch (e) {
       console.error(e);
-      toast.error('Ошибка отправки данных, обратитесь к администратору', {
+      toast.error(COMMON_ERROR, {
         position: 'bottom-right',
         autoClose: 2000,
         hideProgressBar: true,
@@ -217,21 +234,18 @@ const SeventhPage = () => {
     query: `(min-width: 1400px)`,
   });
 
-  const mappingData = Object.keys(CONFIG.mappingFields).filter(k => Object.keys(formData[currentPage]).includes(k));
-
   return (
     <Root>
       <StyledGreetingRow>
-        {isDesktop && <StyledButton disabled={loading} onClick={onFinish}>Далее<ArrowIcon /></StyledButton>}
         {isDesktopMedium && (
           <StyledNotice>
-            <Text>Абсолютно согласен это - 10 баллов, категорически не согласен это 0.</Text>
-            <Text>Варьируйте балы самостоятельно, например, скорее да в зависимости от ситуации – 7 балов, скорее нет в зависимости от ситуации – 3 балла.</Text>
+            <Text>Абсолютно согласен – это 10 баллов. Категорически не согласен – это 0.</Text>
+            <Text>Варьируйте балы самостоятельно. Например, скорее «да» в зависимости от ситуации – 7 баллов. Скорее «нет» в зависимости от ситуации – 3 балла.</Text>
           </StyledNotice>
         )}
       </StyledGreetingRow>
       <StyledHeader>
-        Оцените приведенные ниже высказывания в баллах от 0 до 10.
+        Оцените приведенные ниже высказывания в баллах от 1 до 10.
       </StyledHeader>
       {
         !showMobileNotice && !isDesktopMedium && (
@@ -265,7 +279,7 @@ const SeventhPage = () => {
           </StyledRow>
         ))}
       </StyledListItems>
-      {!isDesktop && <StyledButton disabled={loading} onClick={onFinish}>Далее<ArrowIcon /></StyledButton>}
+      <StyledButton disabled={loading} onClick={onFinish}>Далее<ArrowIcon /></StyledButton>
     </Root>
   );
 }

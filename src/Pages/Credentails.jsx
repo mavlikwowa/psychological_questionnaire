@@ -78,14 +78,14 @@ const Credentails = () => {
       }</GreetingRow>
       <StyledFocus>
         <Input
-          labelComponent={() => inputLabel('Ваше имя:')}
+          labelComponent={() => inputLabel('Ваше имя')}
           placeholder="Иван" value={formData[currentPage].name ?? ''}
           onChange={(e) => onChange(e, 'name')}
         />
         <Input
           type="number"
           min="1"
-          labelComponent={() => inputLabel('Ваш возраст:')}
+          labelComponent={() => inputLabel('Возраст')}
           placeholder="35 лет" value={formData[currentPage].age ?? ''}
           onChange={(e) => onChange(e, 'age')}
           onKeyDown={preventMinusNegatives}
