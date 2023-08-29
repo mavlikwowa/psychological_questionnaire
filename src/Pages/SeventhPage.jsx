@@ -172,9 +172,9 @@ const SeventhPage = () => {
     }
 
     if (isAllCurrentAnswersZero) {
-      toast.error('Кажется, вы не ответили ни на один вопрос на этой странице', {
+      toast.error('Пожалуйста, проверьте ваши ответы. Результаты блока влияют на общий итог теста. Вы уверены в значении 0 во всех пунктах?', {
         position: 'bottom-right',
-        autoClose: 2000,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,

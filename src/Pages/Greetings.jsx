@@ -52,7 +52,7 @@ const Greetings = () => {
   return (
     <Root>
       <GreetingRow />
-      <StyledHeader>Привет!<br />Это ваш персональный тест от AIMME.</StyledHeader>
+      <StyledHeader>Приветствуем!<br />Это ваш персональный тест от AIMME.</StyledHeader>
       <StyledFocus>
         <ListItems>
           <li>Отвечайте на вопросы быстро.</li>
