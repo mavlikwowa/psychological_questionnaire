@@ -11,7 +11,7 @@ const Root = styled.div`
 const StyledInput = styled.input`
   border-radius: 10px;
   background: #FFF;
-  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.10);
   height: 49px;
   padding: 10px 20px;
   width: 100%;
@@ -22,6 +22,7 @@ const StyledInput = styled.input`
     appearance: none;
     margin: 0;
   }
+  -moz-appearance:textfield;
 
   &::placeholder {
     color: #A5A5A5;

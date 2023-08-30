@@ -115,7 +115,7 @@ const StyledRow = styled.span`
   width: 100%;
   display: flex;
   justify-content: ${({ $isDesktop }) => $isDesktop ? 'space-between' : 'flex-end'};
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   
   ${StyledPageCount} {
@@ -125,6 +125,14 @@ const StyledRow = styled.span`
   ${StyledPageCount}, ${StyledNextButton} {
     margin-top: 0;
   }
+`;
+
+const StyledButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
 `;
 
 const StyledQuestionWithInputWrapper = styled.div`
@@ -213,9 +221,7 @@ const SixthPage = () => {
 
   return (
     <Root>
-      <GreetingRow>{
-        isDesktop && <StyledButton onClick={onNextPageClick}>Далее<ArrowIcon /></StyledButton>
-      }</GreetingRow>
+      <GreetingRow />
       <Wrapper>
         <LeftSide>
           <StyledHeader>
@@ -250,13 +256,16 @@ const SixthPage = () => {
                 {questionPage} из {mappingData.length / 2}
               </StyledPageCount>
             )}
-            {!isLastPage && (
-              <StyledNextButton
-                onClick={onNextClick}
-              >
-                Продолжить<ArrowIcon />
-              </StyledNextButton>
-            )}
+            <StyledButtons>
+              {!isLastPage && (
+                <StyledNextButton
+                  onClick={onNextClick}
+                >
+                  Продолжить<ArrowIcon />
+                </StyledNextButton>
+              )}
+              {isDesktop && <StyledButton onClick={onNextPageClick}>Далее<ArrowIcon /></StyledButton>}
+            </StyledButtons>
           </StyledRow>
         </LeftSide>
         {isDesktop && (

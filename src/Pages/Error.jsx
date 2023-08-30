@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Header } from '@ui';
 
 const StyledHeader = styled(Header)`
-  color: red;
+  color: black;
   margin-top: 20%;
   text-align: center;
   width: 100%;
@@ -10,7 +10,7 @@ const StyledHeader = styled(Header)`
 
 const Error = () => {
     return (
-      <StyledHeader>Вы проходили тест, либо идентификатор пользователя не найден.<br/>Обратитесь к администратору</StyledHeader>
+      <StyledHeader>Упс. Вы уже проходили тест :)<br/>Если что-то пошло не так, обратитесь к менеджеру. Он поможет!</StyledHeader>
     );
 };
 

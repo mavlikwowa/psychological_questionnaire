@@ -30,6 +30,7 @@ const StyledButton = styled.button`
   gap: 5.25px;
   flex-shrink: 0;
   border-radius: 2.625px;
+  color: black;
   
   &:hover {
     background: #5A5A5A;

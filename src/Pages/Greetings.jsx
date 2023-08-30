@@ -18,6 +18,7 @@ const Root = styled.main`
 
 const StyledHeader = styled(Header)`
   margin-bottom: 20px;
+  font-weight: normal;
 `
 
 const StyledButton = styled(Button)`

@@ -26,6 +26,7 @@ const StyledInput = styled.input`
     appearance: none;
     margin: 0;
   }
+  -moz-appearance:textfield;
   text-align: center;
   display: flex;
   width: 80px;

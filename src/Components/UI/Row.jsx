@@ -44,12 +44,14 @@ const Number = styled.span`
   border-radius: 5px;
   border: 1px solid black;
   width: 40px;
+  margin-right: 1px;
 
   ${isDesktopMedium} {
     border-radius: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     background: white;
+    margin-right: 0;
   }
 `;
 
