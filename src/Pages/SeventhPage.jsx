@@ -245,15 +245,15 @@ const SeventhPage = () => {
         )}
       </StyledGreetingRow>
       <StyledHeader>
-        Оцените приведенные ниже высказывания в баллах от 1 до 10.
+        Оцените приведенные ниже высказывания в баллах от 0 до 10. Где 10 - абсолютно согласен, 0 - категорически несогласен.
       </StyledHeader>
-      {
-        !showMobileNotice && !isDesktopMedium && (
-          <StyledExampleButton onClick={openMobileNotice}>
-            Смотреть инструкцию<ArrowSlimIcon />
-          </StyledExampleButton>
-        )
-      }
+      {/*{*/}
+      {/*  !showMobileNotice && !isDesktopMedium && (*/}
+      {/*    <StyledExampleButton onClick={openMobileNotice}>*/}
+      {/*      Смотреть инструкцию<ArrowSlimIcon />*/}
+      {/*    </StyledExampleButton>*/}
+      {/*  )*/}
+      {/*}*/}
       {
         showMobileNotice && !isDesktopMedium && (
           <StyledMobileNotice>

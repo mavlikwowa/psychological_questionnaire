@@ -77,7 +77,7 @@ const SecondPage = () => {
       }</GreetingRow>
       <StyledFocus>
         <Question>Какие три вопроса вы хотите решить с помощью сервиса?</Question>
-        <Textarea onChange={(e) => onChange(e, 'threeQuestions')} placeholder="Ваш ответ" />
+        <Textarea onChange={(e) => onChange(e, 'threeQuestions')} />
       </StyledFocus>
       <StyledFocus>
         <Question>Укажите ваши главные роли в жизни на сегодняшний день (муж, жена, родитель, директор и т. д.):</Question>
@@ -92,10 +92,9 @@ const SecondPage = () => {
         <Row>
           <Textarea
             onChange={(e) => onChange(e, 'target1')}
-            placeholder="Повысить уверенность в наличии у себя актуальных навыков, научиться емко их формулировать для потенциального работодателя"
           />
-          <Textarea onChange={(e) => onChange(e, 'target2')} placeholder="Быть счатливым" />
-          <Textarea onChange={(e) => onChange(e, 'target3')} placeholder="Переехать в другую страну" />
+          <Textarea onChange={(e) => onChange(e, 'target2')} />
+          <Textarea onChange={(e) => onChange(e, 'target3')} />
         </Row>
       </StyledFocus>
       {!isDesktop && <StyledButton onClick={goToNextPage}>Далее<ArrowIcon /></StyledButton>}

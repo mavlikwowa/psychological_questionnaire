@@ -88,7 +88,7 @@ const ThirdPage = () => {
   return (
     <Root>
       <GreetingRow />
-      <StyledHeader>Очень быстро, <HighlightedText>не вдумываясь,</HighlightedText> ответьте на вопросы только ДА или НЕТ.</StyledHeader>
+      <StyledHeader>Ответьте на вопросы только &#171;Да&#187; или &#171;Нет&#187;:</StyledHeader>
       <StyledListItems>
         {mappingData.map((k, index) => (
           <StyledRow key={k}>
